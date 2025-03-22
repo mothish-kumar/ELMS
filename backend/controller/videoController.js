@@ -25,7 +25,7 @@ import VideoService from '../service/videoService.js';
         course.videos.push(video._id);
         await course.save();
 
-        res.status(200).json({ message: "Video uploaded successfully" });
+        res.status(201).json({ message: "Video uploaded successfully" });
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' }); 
     }

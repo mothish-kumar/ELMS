@@ -1,5 +1,6 @@
 import express from 'express';
 import { createCourse,getAllCourses,getCourseById ,entrollCourse,deleteCourse} from '../controller/courseController.js';
+import { createDiscussion,getDiscussions } from '../controller/discussionController.js';
 
 const router = express.Router();
 
@@ -8,5 +9,9 @@ router.get('/getAll', getAllCourses);
 router.get('/:id', getCourseById);
 router.post('/enroll/:id', entrollCourse);
 router.delete('/:id', deleteCourse);
+
+//Discussion
+router.post('/:id/discussions', createDiscussion);
+router.get('/:id/discussions', getDiscussions);
 
 export default router;

@@ -12,7 +12,7 @@ export const createCourse = async (req, res) => {
             instructor: req.userId
         });
         await course.save();
-        res.status(200).json({message: "Course Created Successfully"});
+        res.status(201).json({message: "Course Created Successfully"});
     }catch(error){
         res.status(500).json({error: "Internal Server Error"});
     }

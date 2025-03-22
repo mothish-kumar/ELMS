@@ -8,11 +8,11 @@ const AssignmentSchema = new mongoose.Schema({
     submissions: [
       {
         student: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-        fileUrl: { type: String, required: true }, // AWS S3 or other storage
+        fileUrl: { type: String, required: true }, 
         submittedAt: { type: Date, default: Date.now }
       }
     ],
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now } 
   });
 
   export default mongoose.model("Assignment", AssignmentSchema);

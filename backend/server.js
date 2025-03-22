@@ -9,6 +9,8 @@ import {authMiddleware} from './middleware/authMiddleware.js';
 import videoRouter from './router/videoRouter.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import assignmentRouter from './router/assignmentRouter.js';
+import discussionRouter from './router/discussionRouter.js';
 
 dotenv.config();
 
@@ -43,6 +45,8 @@ connectDB();
 app.use('/api/auth', authRouter);
 app.use('/api/course', authMiddleware, courseRouter);
 app.use('/api/video', authMiddleware, videoRouter);
+app.use('/api/assignment', authMiddleware, assignmentRouter);
+app.use('/api/discussion/',authMiddleware,discussionRouter);
 
 // ✅ Correct way to serve uploaded videos
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
