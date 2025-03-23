@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+/* Default (Light Theme) */
+:root {
+  --primary-color: #023974 !important;
+  --background-color: #F8F9FA !important;
+  --text-color: #212529 !important;
+  --accent-color: #28A745 !important;
+  --button-bg: var(--primary-color) !important;
+  --button-text: white !important;
+  --image-filter: invert(0%) !important; /* Normal logo */
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --primary-color: #4CAF50  !important;
+  --background-color: #121212 !important;
+  --text-color: #E0E0E0 !important;
+  --accent-color: #4CAF50 !important;
+  --button-bg: var(--accent-color) !important;
+  --button-text: black !important;
+  --image-filter: invert(100%) !important; /* White logo in dark mode */
+}
+
+/* Apply theme globally */
+body {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  transition: background-color 0.3s, color 0.3s !important;
+}
+
+/* Bootstrap container fix */
+.container-fluid {
+  padding: 0 !important; 
+  margin: 0 !important;
+}
+
+/* Header container with Bootstrap row */
+.header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 10px 20px !important;
+  width: 100% !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  background: var(--background-color) !important;
+  z-index: 1050 !important; /* Ensures header stays on top */
+}
+
+/* Logo styling */
+.logo {
+  width: 90px !important;
+  filter: var(--image-filter) !important;
+  transition: filter 0.3s ease-in-out !important;
+}
+
+/* "E-learn" text */
+.e-learn-text {
+  color: var(--primary-color) !important;
+  font-weight: bold !important;
+  font-size: 2.2rem !important;
+  font-family: 'Lobster', cursive;
+}
+
+/* Theme toggle button */
+.theme-button {
+  background-color: var(--button-bg) !important;
+  color: var(--button-text) !important;
+  padding: 8px !important;
+  border-radius: 50% !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s, color 0.3s !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.pi-student-icon {
+  color: var(--primary-color); 
+}
+
+/* Adjustments for mobile */
+@media (max-width: 768px) {
+  .header {
+    padding: 8px !important;
+    flex-direction: row !important;
+  }
+
+  .logo {
+    width: 90px !important;
+  }
+
+  .e-learn-text {
+    font-size: 1rem !important;
+  }
+
+  .theme-button {
+    padding: 6px !important;
+  }
+}
