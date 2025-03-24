@@ -1,25 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 /* Default (Light Theme) */
 :root {
-  --primary-color: #023974 !important;
-  --background-color: #F8F9FA !important;
-  --text-color: #212529 !important;
-  --accent-color: #28A745 !important;
-  --button-bg: var(--primary-color) !important;
-  --button-text: white !important;
-  --image-filter: invert(0%) !important; /* Normal logo */
+  /* Light Theme Colors */
+  --primary-color: #023974; /* Deep Blue */
+  --background-color: #F8F9FA; /* Light Gray */
+  --text-color: #212529; /* Dark Grayish */
+  --accent-color: #28A745; /* Green */
+  --button-bg: var(--primary-color);
+  --button-text: white;
+  --border-color: #D1D5DB; /* Light border */
 }
 
 /* Dark Theme */
 [data-theme="dark"] {
-  --primary-color: #4CAF50  !important;
-  --background-color: #121212 !important;
-  --text-color: #E0E0E0 !important;
-  --accent-color: #4CAF50 !important;
-  --button-bg: var(--accent-color) !important;
-  --button-text: black !important;
-  --image-filter: invert(100%) !important; /* White logo in dark mode */
+  --primary-color: #4CAF50; /* Green */
+  --background-color: #121212; /* Deep Black */
+  --text-color: #E0E0E0; /* Light Gray */
+  --accent-color: #4CAF50; /* Green Accent */
+  --button-bg: var(--accent-color);
+  --button-text: black;
+  --border-color: #333; /* Darker border */
 }
+
 
 /* Apply theme globally */
 body {
@@ -92,7 +94,7 @@ body {
   }
 
   .e-learn-text {
-    font-size: 1rem !important;
+    font-size: 0.8rem !important;
   }
 
   .theme-button {

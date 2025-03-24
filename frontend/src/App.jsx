@@ -1,46 +1,41 @@
-import react,{useState,useEffect} from 'react'
-import { useTheme } from './utils/useTheme'
-import { MdDarkMode } from "react-icons/md";
-import Cookies from 'js-cookie';
-import AuthButtons from './component/AuthButtons';
-import { PiStudent } from "react-icons/pi";
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useTheme } from './utils/useTheme';
+import Header from './component/Header';
+import './App.css';
+import { Toaster } from 'sonner';
+import InstructorHome from './pages/InstructorHome';
+import StudentHome from './pages/StudentHome';
+import LandingPage from './pages/LandingPage';
+
+
+
 
 function App() {
-  
   const { theme, toggleTheme } = useTheme();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = Cookies.get('token'); 
-    if(token){
+    const token = localStorage.getItem("token");
+    if (token) {
       setIsLoggedIn(true);
     }
-  },[])
+  }, []);
 
   return (
-    <>
-      <div className="container-fluid">
-        <div className="row ">
-          <div className="col-12">
-            <div className="header d-flex align-items-center justify-content-between">
+    <Router>
+      <Toaster position="top-right" richColors />
+      <Header isLoggedIn={isLoggedIn} setIsLoggedIn = {setIsLoggedIn} toggleTheme={toggleTheme} />
+      <div style={{ marginTop: "40px" }}>
 
-              <div className="d-flex gap-2 align-items-center">
-              <PiStudent size={50}  className="pi-student-icon"/>
-                <div className="e-learn-text">E-learn Platform</div>
-              </div>
-             <div className='d-flex gap-5 align-items-center'>
-                  {!isLoggedIn && <AuthButtons />}
-                    <button onClick={toggleTheme} className="theme-button">
-                      <MdDarkMode size={25} />
-                    </button>
-             </div>
-            </div>
-          </div>
-        </div>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/instructorHome" element={<InstructorHome />} />
+          <Route path="/studentHome" element={<StudentHome/>} />
+        </Routes>
       </div>
-      </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;

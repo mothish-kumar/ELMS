@@ -1,6 +1,9 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import User from '../Schema/UserSchema.js';
+import Course from '../Schema/CourseSchema.js';
+
+
 
 export const login = async (req, res) => {
     try{
@@ -16,9 +19,8 @@ export const login = async (req, res) => {
         if(!isMatch){
             return res.status(400).json({error: "Invalid Credentials"});
         }
-        const token = jwt.sign({id: user._id,role:user.role}, process.env.JWT_SECRET);
-        res.cookie("token", token, {httpOnly: true,secure:false});
-        res.status(200).json({message: "Login Successful"});
+        const token = jwt.sign({id: user._id,role:user.role}, process.env.JWT_SECRET, {expiresIn: "1h"});
+        res.status(200).json({message: "Login Successful",role:user.role,token});
     }catch(error){
         res.status(500).json({error: "Internal Server Error"});
     }
@@ -49,9 +51,20 @@ export const register = async (req, res) => {
 
 export const logout = async (req, res) => {
     try{
-        res.clearCookie("token");
         res.status(200).json({message: "Logout Successful"});
     }catch(error){
         res.status(500).json({error: "Internal Server Error"});
     }
 }
+
+export const getTotal = async(req,res)=>{
+    try{
+        const totalCourses = await Course.countDocuments();
+        const totalStudents = await User.countDocuments({role:"student"});
+        const totalInstructors = await User.countDocuments({role:"instructor"});
+        res.status(200).json({totalCourses,totalStudents,totalInstructors});
+    }catch(error){
+        res.status(500).json({error: "Internal Server Error"});
+    }
+}
+
