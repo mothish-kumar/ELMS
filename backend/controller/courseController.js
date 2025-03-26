@@ -1,5 +1,7 @@
+import Assignment from "../Schema/AssignmentSchema.js";
 import Course from "../Schema/CourseSchema.js";
 import User from "../Schema/UserSchema.js";
+import Video from '../Schema/VideoSchema.js'
 
 export const createCourse = async (req, res) => {
     if(req.role !== "instructor")   return res.status(401).json({error: "You are not authorized to create a course"});
@@ -21,6 +23,15 @@ export const createCourse = async (req, res) => {
 export const getAllCourses = async (req, res) => {
     try{
         const courses = await Course.find().populate("instructor", "name email");
+        res.status(200).json({courses});
+    }catch(error){
+        res.status(500).json({error: "Internal Server Error"});
+    }
+}
+
+export const getAllCoursesByInstructor = async (req, res) => {
+    try{
+        const courses = await Course.find({ instructor: req.userId }).populate("instructor", "name email");
         res.status(200).json({courses});
     }catch(error){
         res.status(500).json({error: "Internal Server Error"});
@@ -73,3 +84,32 @@ export const deleteCourse = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
       }
 }
+export const getTotal = async (req, res) => {
+
+    try {
+        const instructorId = req.userId;
+
+
+        if (!instructorId) {
+            return res.status(400).json({ error: "User ID is missing in request." });
+        }
+
+        const totalCourses = await Course.countDocuments({ instructor: instructorId });
+
+        const courseIds = await Course.find({ instructor: instructorId }).distinct("_id");
+
+
+        const totalAssignments = await Assignment.countDocuments({ course: { $in: courseIds } });
+        const totalVideos = await Video.countDocuments({ course: { $in: courseIds } });
+
+
+
+        res.status(200).json({ totalCourses, totalAssignments, totalVideos });
+
+    } catch (error) {
+
+        res.status(500).json({ error: "Internal Server Error", message: error.message });
+    }
+};
+
+

@@ -84,7 +84,7 @@ const ContactUs = () => {
                 sx={{ mb: 2 }}
               />
 
-              <Button type="submit" variant="contained" color="primary" size="large" fullWidth>
+              <Button type="submit" variant="contained" sx={{color:"var(--button-text)", backgroundColor:"var(--button-bg)"}} size="large" fullWidth>
                 Send Message
               </Button>
             </form>

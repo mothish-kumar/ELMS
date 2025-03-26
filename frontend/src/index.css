@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 /* Default (Light Theme) */
+html, body, * {
+  font-family: 'Mochiy Pop One', system-ui, Avenir, Helvetica, Arial, sans-serif !important;
+}
 :root {
   /* Light Theme Colors */
+
   --primary-color: #023974; /* Deep Blue */
   --background-color: #F8F9FA; /* Light Gray */
   --text-color: #212529; /* Dark Grayish */
@@ -13,6 +18,7 @@
 
 /* Dark Theme */
 [data-theme="dark"] {
+
   --primary-color: #4CAF50; /* Green */
   --background-color: #121212; /* Deep Black */
   --text-color: #E0E0E0; /* Light Gray */
@@ -62,7 +68,7 @@ body {
   color: var(--primary-color) !important;
   font-weight: bold !important;
   font-size: 2.2rem !important;
-  font-family: 'Lobster', cursive;
+  font-family: 'Lobster', cursive!important;
 }
 
 /* Theme toggle button */

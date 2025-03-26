@@ -58,7 +58,7 @@ const LandingPage = () => {
 
   const [registerModal,setRegisterModal] = useState(false);
     const [registerData, setRegisterData] = useState({ name:"", email: "", password: "" ,role:""});
-    const [counts,setCounts] = useState({totalCourses:0,totalStudents:0,totalInstructors:0});
+    const [counts,setCounts] = useState({totalCourses:0,totalStudents:0,totalInstructors:0}); 
 
     useEffect(()=>{
         const fetchCounts = async ()=>{

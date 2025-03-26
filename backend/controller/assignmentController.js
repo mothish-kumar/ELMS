@@ -28,7 +28,10 @@ export const createAssignment = async (req, res) => {
 
 export const getAssignment = async(req,res)=>{
     try {
-        const assignment = await Assignment.findById(req.params.id).populate("course", "title");
+        const assignment = await Assignment.find({course:req.params.id}).populate("course", "title") .populate({
+          path: "submissions.student",
+          select: "name email",
+        });;
     
         if (!assignment) return res.status(404).json({ message: "Assignment not found" });
     
@@ -61,10 +64,18 @@ export const submitAssignment = async(req,res)=>{
         });
     
         await submission.save();
+        
+        assignment.submissions.push({
+          student: req.userId,
+          fileUrl: submissionUrl,
+          submittedAt: new Date()
+        });
+    
+        await assignment.save(); 
     
         res.status(201).json({ message: "Assignment submitted successfully" });
       } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: "Internal Server Error",errorMessage:error.message });
       }
 }
 
@@ -88,20 +99,25 @@ export const updateAssignmentMark = async(req,res)=>{
     }
 }
 
-export const getSubmissions = async(req,res)=>{
-    try {
-        const assignment = await Assignment.findById(req.params.id).populate("course");
-    
-        if (!assignment) return res.status(404).json({ message: "Assignment not found" });
-    
-        if (assignment.course.instructor.toString() !== req.userId.toString())  return res.status(403).json({ message: "Not authorized" });    
-        
-        const submissions = await Submission.find({ assignment: req.params.id })
-          .populate("student", "name email")
-          .select("submissionUrl marks");
-    
-        res.status(200).json(submissions);
-      } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" });
-      }
-}
+export const getSubmissions = async (req, res) => {
+  try {
+    // Find the assignment by ID
+    const assignment = await Assignment.findById(req.params.id).populate("course");
+
+    if (!assignment) return res.status(404).json({ message: "Assignment not found" });
+
+    // Check if the logged-in user is the instructor of the course
+    if (assignment.course.instructor.toString() !== req.userId.toString()) {
+      return res.status(403).json({ message: "Not authorized" });
+    }
+
+    // Fetch submissions for the assignment
+    const submissions = await Submission.find({ assignment: req.params.id })
+      .populate("student", "name email")
+      .select("submissionUrl marks submittedAt assignment");
+
+    res.status(200).json(submissions);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error", errorMessage: error.message });
+  }
+};

@@ -12,7 +12,7 @@ const AssignmentSchema = new mongoose.Schema({
         submittedAt: { type: Date, default: Date.now }
       }
     ],
-    createdAt: { type: Date, default: Date.now } 
+    createdAt: { type: Date, default: Date.now }  
   });
 
   export default mongoose.model("Assignment", AssignmentSchema);

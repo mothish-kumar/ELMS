@@ -15,6 +15,7 @@ function Header({ isLoggedIn, setIsLoggedIn,toggleTheme }) {
               <div className="d-flex gap-5 align-items-center">
                 {!isLoggedIn ?(<AuthButtons setIsLoggedIn={setIsLoggedIn} />) :( <button onClick={() => {setIsLoggedIn(false)
                   localStorage.removeItem("token");
+                  localStorage.removeItem("useName")
                   window.location.href = "/";
                 }} className="btn btn-danger px-5">Logout</button>)}
                 <button onClick={toggleTheme} className="theme-button">

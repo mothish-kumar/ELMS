@@ -8,5 +8,5 @@ const VideoSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
   });
   
-  export default  mongoose.model("Video", VideoSchema);
+  export default  mongoose.model("Video", VideoSchema); 
   

@@ -37,8 +37,13 @@ const AuthButtons = ({ setIsLoggedIn }) => {
       await axiosInstace.post("/auth/login", loginData).then((res) => {
         if(res.status === 200){
           const token =res.data.token;
+          const userName = res.data.userName
+          const userId = res.data.userId
           if (token) {
             localStorage.setItem("token", token); 
+            localStorage.setItem("useName",userName)
+            localStorage.setItem("email",loginData.email)
+            localStorage.setItem("userId",userId)
             setIsLoggedIn(true);
           }else{
             console.log('Token not found')

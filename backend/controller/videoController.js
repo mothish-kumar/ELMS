@@ -33,7 +33,7 @@ import VideoService from '../service/videoService.js';
 
  export const getVideo = async (req, res) => {
     try {
-        const video = await Video.findById(req.params.id).populate("course", "title");
+        const video = await Video.find({course:req.params.id}).populate("course", "title");
     
         if (!video) return res.status(404).json({ message: "Video not found" });
     
