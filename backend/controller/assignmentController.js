@@ -1,6 +1,7 @@
 import Assignment from "../Schema/AssignmentSchema.js";
 import Course from "../Schema/CourseSchema.js";
 import Submission from "../Schema/SubmissionSchema.js";
+import mongoose from "mongoose";
 
 export const createAssignment = async (req, res) => {
     if(req.role !== "instructor")  return res.status(400).json({message: "You are not allowed to create assignment"});
@@ -28,7 +29,8 @@ export const createAssignment = async (req, res) => {
 
 export const getAssignment = async(req,res)=>{
     try {
-        const assignment = await Assignment.find({course:req.params.id}).populate("course", "title") .populate({
+      const courseId = new mongoose.Types.ObjectId(req.params.id);
+        const assignment = await Assignment.find({course: courseId}).populate("course", "title") .populate({
           path: "submissions.student",
           select: "name email",
         });;
@@ -37,7 +39,7 @@ export const getAssignment = async(req,res)=>{
     
         res.status(200).json(assignment);
       } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: "Internal Server Error" ,errorMessage:error.message});
       }
 }
 
@@ -121,3 +123,5 @@ export const getSubmissions = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error", errorMessage: error.message });
   }
 };
+
+

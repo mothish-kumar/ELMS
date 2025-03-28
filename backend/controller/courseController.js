@@ -2,6 +2,7 @@ import Assignment from "../Schema/AssignmentSchema.js";
 import Course from "../Schema/CourseSchema.js";
 import User from "../Schema/UserSchema.js";
 import Video from '../Schema/VideoSchema.js'
+import StudentProgress from '../Schema/StudentProgressSchema.js'
 
 export const createCourse = async (req, res) => {
     if(req.role !== "instructor")   return res.status(401).json({error: "You are not authorized to create a course"});
@@ -62,6 +63,13 @@ export const entrollCourse = async (req, res) => {
           });
 
         await course.save();
+      
+      // 🆕 Create an empty progress record when enrolled
+      await StudentProgress.create({
+        studentId: req.userId,
+        courseId:req.params.id,
+        progress: 0
+      });
         res.status(200).json({message: "You have successfully enrolled in this course"});
     }catch(error){
         console.log(error.message)
@@ -111,5 +119,6 @@ export const getTotal = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error", message: error.message });
     }
 };
+
 
 

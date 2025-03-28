@@ -1,5 +1,5 @@
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Avatar, Box, Typography } from "@mui/material";
-import { VideoLibrary, School, Assignment, Person, Telegram} from "@mui/icons-material";
+import { VideoLibrary, School, Assignment, Person} from "@mui/icons-material";
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import TelegramIcon from '@mui/icons-material/Telegram';
 

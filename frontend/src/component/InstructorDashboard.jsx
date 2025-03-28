@@ -11,7 +11,7 @@ const InstructorDashboard = () => {
       const [counts,setCounts] = useState({totalCourses:0,totalAssignments:0,totalVideos:0});
       const [courses,setCourses] = useState([])
       const [videosByCourse, setVideosByCourse] = useState({});
-      const [selectedVideo, setSelectedVideo] = useState(null); // Store selected video
+      const [selectedVideo, setSelectedVideo] = useState(null);
       const [open, setOpen] = useState(false);
       const fetchCourseList = async()=>{
         try{
