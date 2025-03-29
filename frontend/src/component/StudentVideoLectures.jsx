@@ -67,14 +67,14 @@ const StudentVideoLectures = () => {
 
   const handleLike = async (videoId) => {
     try {
-      await axiosInstance.post(`/video/like/${videoId}`);
+      await axiosInstance.post(`/video/${videoId}/like`);
       setVideos((prev) =>
         prev.map((v) =>
           v._id === videoId ? { ...v, likes: v.likes + 1 } : v
         )
       );
     } catch (err) {
-      toast.error("Failed to like video");
+      toast.success("You already liked a video");
     }
   };
 
@@ -145,7 +145,7 @@ const StudentVideoLectures = () => {
             <Grid item xs={12} md={4} key={course._id}>
               <GradientCard onClick={() => handleOpenDialog(course)}>
                 <Typography variant="h6">{course.title}</Typography>
-              </GradientCard>
+              </GradientCard> 
             </Grid>
           ))
         )}
@@ -188,7 +188,7 @@ const StudentVideoLectures = () => {
                     <PlayCircle style={{width:'50px'}} />
                   </IconButton>
                   <IconButton color="success" onClick={() => handleLike(video._id)}>
-                    <ThumbUp style={{width:'50px'}} /> {video.likes}
+                    <ThumbUp style={{width:'50px'}} /> {video.likes.length}
                   </IconButton>
                   <FormControlLabel
                       control={
@@ -196,7 +196,7 @@ const StudentVideoLectures = () => {
                           checked={!!watchedVideo[video._id]} 
                           onChange={() => handleWatched(selectedCourse._id, video._id)}
                           color="primary"
-                          disabled={watchedVideo[video._id]} // Disable if already watched
+                          disabled={watchedVideo[video._id]} 
                         />
                       }
                       label={watchedVideo[video._id] ? "Watched" : "Mark as Watched"}

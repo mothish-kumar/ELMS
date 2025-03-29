@@ -108,9 +108,9 @@ const Chat = ({ courseId, userId }) => {
       <Box key={index} className={`chat-bubble ${msg.sender?._id === userId ? "own-message" : ""}`}>
         <Avatar className="chat-avatar">{msg.sender?.name[0]}</Avatar>
         <Box className="chat-content">
-          <Typography className="chat-sender">{msg.sender?.name}</Typography>
+          <Typography style={{color:'var(--primary-color)'}} className="chat-sender">{msg.sender?.name}</Typography>
           {msg.type === "message" ? (
-            <Typography className="chat-text">{msg.message}</Typography>
+            <Typography style={{color:'black'}} className="chat-text">{msg.message}</Typography>
           ) : (
             <Box className="chat-material">
               <Typography className="chat-text" > </Typography>
