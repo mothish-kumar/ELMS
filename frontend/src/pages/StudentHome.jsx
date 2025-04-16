@@ -7,6 +7,7 @@ import StudentVideoLectures from '../component/StudentVideoLectures';
 import StudentProfile from '../component/StudentProfile';
 import StudentChat from '../component/StudentChat';
 import StudentAssignment from '../component/StudentAssignment'
+import StudentQuiz from '../component/StudentQuiz';
 const StudentHome = () => {
   const [section, setSection] = useState("dashboard");
   return (
@@ -16,6 +17,7 @@ const StudentHome = () => {
         {section === "dashboard" && <StudentDashboard/>  }
           {section === "courseManagement" && <StudentCourseManagement/> }
           {section === "videoLectures" && <StudentVideoLectures/>}
+          {section === "quiz" && <StudentQuiz/>}
           {section === "assignments" && <StudentAssignment/>}
           {section === "profile" && <StudentProfile/>}
           {section === "chat" && <StudentChat/>}

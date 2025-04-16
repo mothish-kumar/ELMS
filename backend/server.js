@@ -16,6 +16,7 @@ import assignmentRouter from './router/assignmentRouter.js';
 import discussionRouter from './router/discussionRouter.js';
 import materialRouter from './router/MaterialRouter.js'
 import studentProgressRouter from './router/studentProgressRouter.js'
+import quizRouter from './router/quizRouter.js'
 
 dotenv.config();
 
@@ -55,7 +56,7 @@ app.use('/api/assignment', authMiddleware, assignmentRouter);
 app.use('/api/discussion/',authMiddleware,discussionRouter);
 app.use('/api/material',authMiddleware,materialRouter)
 app.use('/api/studentProgress',authMiddleware,studentProgressRouter)
-
+app.use('/api/quiz',authMiddleware,quizRouter)
 
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));

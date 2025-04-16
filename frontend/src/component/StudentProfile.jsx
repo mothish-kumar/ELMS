@@ -7,6 +7,7 @@ import {
   PieChart, Pie, Cell 
 } from "recharts";
 import axiosInstance from "../utils/axiosInstance";
+import StudentQuizChart from "./StudentQuizChart";
 
 const StudentProfile = () => {
   const [student, setStudent] = useState(null);
@@ -24,6 +25,7 @@ const StudentProfile = () => {
   const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#ff6361"];
 
   return (
+  <>
     <Container>
       {student && (
         <Card
@@ -124,6 +126,8 @@ const StudentProfile = () => {
         ))}
       </Grid>
     </Container>
+    <StudentQuizChart/>
+  </>
   );
 };
 

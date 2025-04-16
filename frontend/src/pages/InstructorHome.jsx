@@ -7,6 +7,7 @@ import Assignments from '../component/Assignments'
 import CreateCourse from'../component/CreateCourse'
 import Submissions from '../component/Submissions'
 import InstructorChat from '../component/InstructorChat'
+import InstructorQuiz from '../component/InstructorQuiz'
 
 const InstructorHome = () => {
   const [section, setSection] = useState("dashboard");
@@ -17,6 +18,7 @@ const InstructorHome = () => {
         {section === "courses" && <CreateCourse/>}
         {section === "dashboard" && <InstructorDashboard />}
         {section === "videos" && <VideoUpload />}
+        {section === "quiz" && <InstructorQuiz/>}
         {section === "assignments" && <Assignments />}
         {section === "submissions" && <Submissions />}
         {section === "chat" && <InstructorChat />}

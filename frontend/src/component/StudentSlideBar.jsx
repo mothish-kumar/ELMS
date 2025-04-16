@@ -3,6 +3,7 @@ import { Drawer, List, ListItem, ListItemIcon, ListItemText, Avatar, Box, Typogr
 import { VideoLibrary, School, Assignment, Person} from "@mui/icons-material";
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import TelegramIcon from '@mui/icons-material/Telegram';
+import QuizIcon from '@mui/icons-material/Quiz';
 
 const StudentSlideBar = ({onSelect}) => {
     const useName = localStorage.getItem("useName")||"Unknown"
@@ -47,6 +48,12 @@ const StudentSlideBar = ({onSelect}) => {
               </ListItemIcon>
               <ListItemText primary="Video Lectures" />
             </ListItem>
+            <ListItem button onClick={() => onSelect("quiz")}>
+                        <ListItemIcon sx={{ color: "var(--text-color)" }}>
+                          <QuizIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Quiz" />
+                        </ListItem>
             <ListItem button onClick={() => onSelect("assignments")}>
               <ListItemIcon sx={{ color: "var(--text-color)" }}>
                 <Assignment />
